@@ -3,10 +3,32 @@ package awagadro.studentApp.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "profession")
 public class Profession {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "profession_id")
 	private Long professionId;
+
+	@Column(name = "profession_name")
 	private String professionName;
+
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinTable(name = "SPECIALITY_SUBJECT", joinColumns = @JoinColumn(name = "PROFESSION_ID"), inverseJoinColumns = @JoinColumn(name = "SUBJECT_ID"))
 	private Set<Subject> subjectList = new HashSet<Subject>();
 
 	public Long getProfessionId() {

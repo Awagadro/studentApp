@@ -35,12 +35,14 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<!-- Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>5.4.25.Final</version>
 		</dependency>
+	
 
 		<!-- Servlet Dependency -->
 		<dependency>

@@ -34,11 +34,10 @@
 		<property name="show_sql">true</property>
 
 		<!-- Mapping files -->
-		<mapping
-			resource="awagadro/studentApp/entity/Profession.hbm.xml" />
-		<mapping resource="awagadro/studentApp/entity/Applicant.hbm.xml" />
-		<mapping resource="awagadro/studentApp/entity/Subject.hbm.xml" />
-		<mapping resource="awagadro/studentApp/entity/ApplicantResult.hbm.xml" />
+		<mapping class="awagadro.studentApp.entity.Profession" />
+		<mapping class="awagadro.studentApp.entity.Applicant" />
+		<mapping class="awagadro.studentApp.entity.Subject" />
+		<mapping class="awagadro.studentApp.entity.ApplicantResult" />
 	</session-factory>
 
 </hibernate-configuration>
