@@ -23,10 +23,8 @@ public class Profession {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "profession_id")
 	private Long professionId;
-
 	@Column(name = "profession_name")
 	private String professionName;
-
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinTable(name = "SPECIALITY_SUBJECT", joinColumns = @JoinColumn(name = "PROFESSION_ID"), inverseJoinColumns = @JoinColumn(name = "SUBJECT_ID"))
 	private Set<Subject> subjectList = new HashSet<Subject>();
@@ -53,11 +51,6 @@ public class Profession {
 
 	public void setSubjectList(Set<Subject> subjectList) {
 		this.subjectList = subjectList;
-	}
-
-	@Override
-	public String toString() {
-		return "Profession [professionId=" + professionId + ", professionName=" + professionName + "]";
 	}
 
 }

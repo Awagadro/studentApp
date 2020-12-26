@@ -19,15 +19,12 @@ public class ApplicantResult {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "applicant_result_id")
 	private Long applicantResultId;
-
 	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "applicant_id")
 	private Applicant applicant;
-
 	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "subject_id")
 	private Subject subject;
-
 	@Column(name = "mark")
 	private Integer mark;
 

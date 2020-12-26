@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- Database connection settings -->
+	<bean name="studentDS"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/db_applicant?serverTimezone=GMT" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+		<!-- property name="serverTimezone" value="GMT" / -->
+		<!-- property name="connection.characterEncoding" value="UTF-8" / -->
+		<!-- property name="useUnicode" value="true" / -->
+		<!-- property name="autoReconnect" value="true" / -->
+		<!-- property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" / -->
+	</bean>
+
+	<!-- Hibernate's session management -->
+	<bean name="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="studentDS" />
+		<property name="annotatedClasses">
+			<list>
+				<value>awagadro.studentApp.entity.Profession</value>
+				<value>awagadro.studentApp.entity.Subject</value>
+				<value>awagadro.studentApp.entity.Applicant</value>
+				<value>awagadro.studentApp.entity.ApplicantResult</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+				hibernate.show_sql=true
+			</value>
+		</property>
+	</bean>
+
+	<!-- Hibernate's transaction management -->
+	<bean name="txManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Interceptors for opening / closing transactions -->
+	<bean name="abstractTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="txManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_REQUIRED, readOnly
+				</prop>
+				<prop key="get*">PROPAGATION_REQUIRED, readOnly
+				</prop>
+				<prop key="add*">PROPAGATION_REQUIRED,-Exception
+				</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception
+				</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-Exception
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Hibernate's DBase requests management -->
+	<bean name="hibernateTemplate"
+		class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

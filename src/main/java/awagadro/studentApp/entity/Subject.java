@@ -22,10 +22,8 @@ public class Subject {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "subject_id")
 	private Long subjectId;
-
 	@Column(name = "subject_name")
 	private String subjectName;
-
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinTable(name = "SPECIALITY_SUBJECT", joinColumns = @JoinColumn(name = "SUBJECT_ID"), inverseJoinColumns = @JoinColumn(name = "PROFESSION_ID"))
 	private Set<Profession> professionList;

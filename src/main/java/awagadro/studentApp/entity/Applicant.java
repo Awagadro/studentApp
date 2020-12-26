@@ -22,23 +22,17 @@ public class Applicant {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "applicant_id")
 	private Long applicantId;
-
 	@ManyToOne(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinColumn(name = "profession_id")
 	private Profession profession;
-
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "applicant")
 	private List<ApplicantResult> applicantResultList;
-
 	@Column(name = "first_name")
 	private String firstName;
-
 	@Column(name = "last_name")
 	private String lastName;
-
 	@Column(name = "middle_name")
 	private String middleName;
-
 	@Column(name = "entrance_year")
 	private Integer entranceYear;
 
